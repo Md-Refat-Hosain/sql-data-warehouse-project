@@ -15,203 +15,69 @@ SECTION 1: CRM SYSTEM TABLES [00:08:17]
 
 */
 
+DROP TABLE IF EXISTS bronze.crm_cust_info;
+CREATE TABLE bronze.crm_cust_info (
+    id             INT,
+    key            VARCHAR(50),
+    first_name     VARCHAR(50),
+    last_name      VARCHAR(50),
+    marital_status VARCHAR(50),
+    gender         VARCHAR(50),
+    is_active      INT,
+    create_date    TIMESTAMP
+);
+
+-- --- Table 2: crm_prd_info [00:08:20] ---
+DROP TABLE IF EXISTS bronze.crm_prd_info;
+CREATE TABLE bronze.crm_prd_info (
+    prd_id       INT,
+    prd_key      VARCHAR(50),
+    prd_nm       VARCHAR(50),
+    prd_cost     NUMERIC,
+    prd_line     VARCHAR(50),
+    start_dt     TIMESTAMP,
+    end_dt       TIMESTAMP
+);
+
+-- --- Table 3: crm_sales_details [00:08:23] ---
+DROP TABLE IF EXISTS bronze.crm_sales_details;
+CREATE TABLE bronze.crm_sales_details (
+    sls_ord_num  VARCHAR(50),
+    sls_prd_key  VARCHAR(50),
+    sls_cust_id  INT,
+    sls_order_dt TIMESTAMP,
+    sls_ship_dt  TIMESTAMP,
+    sls_due_dt   TIMESTAMP,
+    sls_sales    NUMERIC,
+    sls_qty      INT,
+    sls_price    NUMERIC
+);
 
 
---DWH project by - DWB
+-- ==============================================================================
+-- SECTION 2: ERP SYSTEM TABLES [00:08:25]
+-- ==============================================================================
 
--- 1. Empty the table
+-- --- Table 4: erp_cust_az12 [00:08:35] ---
+DROP TABLE IF EXISTS bronze.erp_cust_az12;
+CREATE TABLE bronze.erp_cust_az12 (
+    cid    VARCHAR(50),
+    bdate  DATE,
+    gen    VARCHAR(50)
+);
 
-CREATE OR REPLACE PROCEDURE bronze.load_bronze()
-LANGUAGE plpgsql
-AS $$
+-- --- Table 5: erp_loc_a101 [00:08:35] ---
+DROP TABLE IF EXISTS bronze.erp_loc_a101;
+CREATE TABLE bronze.erp_loc_a101 (
+    cid    VARCHAR(50),
+    cntry  VARCHAR(50)
+);
 
-DECLARE
-    -- Total batch execution variables 
-    batch_start_time TIMESTAMP;
-    batch_end_time   TIMESTAMP;
-    
-    -- Individual table execution variables 
-    step_start_time  TIMESTAMP;
-    step_end_time    TIMESTAMP;
-    duration_secs    INT;
-
-
-BEGIN
-
-
-        RAISE NOTICE '==================================================';
-        RAISE NOTICE 'Loading Bronze Layer';
-        RAISE NOTICE '==================================================';
-
-
-        RAISE NOTICE '--------------------------------------------------';
-        RAISE NOTICE 'Loading CRM Tables';
-        RAISE NOTICE '--------------------------------------------------';
-
-        -- 1. Capture the start time of the entire batch
-        batch_start_time := clock_timestamp();
-        
-        -- --- Table 1: crm_cust_info ---
-        -- Start Timer for this table
-        step_start_time := clock_timestamp();
-        
-        RAISE NOTICE '>> Truncating Table: bronze.crm_cust_info';
-
-        TRUNCATE TABLE bronze.crm_cust_info;
-
-        RAISE NOTICE '>> Inserting Data Into: bronze.crm_cust_info';
-        COPY bronze.crm_cust_info 
-        FROM  '/Users/Shared/sql-data-warehouse-project/datasets/source_crm/cust_info.csv'
-        WITH (FORMAT CSV, HEADER true, DELIMITER ',');
-        -- End Timer and Calculate Duration 
-        step_end_time := clock_timestamp();
-        duration_secs := EXTRACT(EPOCH FROM (step_end_time - step_start_time))::INT;
-
-        RAISE NOTICE '==================================================';
-
-        RAISE NOTICE 'Total Pipeline Duration: % seconds', duration_secs; 
-        RAISE NOTICE '==================================================';
-
-        RAISE NOTICE '>> Load Duration: % seconds', duration_secs; 
-
-
-        RAISE NOTICE '- - - - - - - - - - - - - - - - - - - - - - - - -';
-        ---prd_info
-
-        -- --- Table 2: ---
-        -- Start Timer for this table
-        step_start_time := clock_timestamp();
-
-        RAISE NOTICE '>> Truncating Table: bronze.crm_prd_info';
-        TRUNCATE TABLE bronze.crm_prd_info;
-
-        RAISE NOTICE '>> Inserting Data Into: bronze.crm_prd_info';
-        COPY bronze.crm_prd_info 
-        FROM  '/Users/Shared/sql-data-warehouse-project/datasets/source_crm/prd_info.csv'
-        WITH (FORMAT CSV, HEADER true, DELIMITER ',');
-        
-        step_end_time := clock_timestamp();
-        duration_secs := EXTRACT(EPOCH FROM (step_end_time - step_start_time))::INT;
-
-        RAISE NOTICE '==================================================';
-
-        RAISE NOTICE 'Total Pipeline Duration: % seconds', duration_secs; 
-        RAISE NOTICE '==================================================';
-
-        RAISE NOTICE '- - - - - - - - - - - - - - - - - - - - - - - - -';
-        --- sales_details
-
-                -- --- Table 3: ---
-        -- Start Timer for this table
-        step_start_time := clock_timestamp();
-
-        RAISE NOTICE '>> Truncating Table: bronze.crm_sales_details';
-        TRUNCATE TABLE bronze.crm_sales_details;
-
-        RAISE NOTICE '>> Inserting Data Into: bronze.crm_sales_details';
-        COPY bronze.crm_sales_details 
-        FROM  '/Users/Shared/sql-data-warehouse-project/datasets/source_crm/sales_details.csv'
-        WITH (FORMAT CSV, HEADER true, DELIMITER ',');
-
-        step_end_time := clock_timestamp();
-        duration_secs := EXTRACT(EPOCH FROM (step_end_time - step_start_time))::INT;
-
-        RAISE NOTICE '==================================================';
-
-        RAISE NOTICE 'Total Pipeline Duration: % seconds', duration_secs;
-        RAISE NOTICE '==================================================';
-
-        ---- ERP
-        RAISE NOTICE '--------------------------------------------------';
-        RAISE NOTICE 'Loading ERP Tables';
-        RAISE NOTICE '--------------------------------------------------';
-
-        ---- erp_CUST_AZ12
-        -- --- Table 4: ---
-        -- Start Timer for this table
-        step_start_time := clock_timestamp();
-        RAISE NOTICE '>> Truncating Table:  bronze.erp_CUST_AZ12';
-
-        TRUNCATE TABLE bronze.erp_CUST_AZ12;
-
-        -- 2. Cleanly load the data directly from your Desktop path
-        RAISE NOTICE '>> Inserting Table:  bronze.erp_CUST_AZ12';
-
-        COPY bronze.erp_CUST_AZ12 
-        FROM  '/Users/Shared/sql-data-warehouse-project/datasets/source_erp/CUST_AZ12.csv'
-        WITH (FORMAT CSV, HEADER true, DELIMITER ',');
-
-        step_end_time := clock_timestamp();
-        duration_secs := EXTRACT(EPOCH FROM (step_end_time - step_start_time))::INT;
-
-        RAISE NOTICE '==================================================';
-
-        RAISE NOTICE 'Total Pipeline Duration: % seconds', duration_secs; 
-        RAISE NOTICE '==================================================';        
-
-        RAISE NOTICE '- - - - - - - - - - - - - - - - - - - - - - - - -';
-
-        --- LOC_A101
-                -- --- Table 5: ---
-        -- Start Timer for this table
-        step_start_time := clock_timestamp();
-        RAISE NOTICE '>> Truncating Table:  bronze.erp_LOC_A101';
-        TRUNCATE TABLE bronze.erp_LOC_A101;
-
-        -- 2. Cleanly load the data directly from your Desktop path
-        RAISE NOTICE '>> Inserting Table:  bronze.erp_LOC_A101';
-        COPY bronze.erp_LOC_A101 
-        FROM  '/Users/Shared/sql-data-warehouse-project/datasets/source_erp/LOC_A101.csv'
-        WITH (FORMAT CSV, HEADER true, DELIMITER ',');
-        
-        step_end_time := clock_timestamp();
-        duration_secs := EXTRACT(EPOCH FROM (step_end_time - step_start_time))::INT;
-
-        RAISE NOTICE '==================================================';
-
-        RAISE NOTICE 'Total Pipeline Duration: % seconds', duration_secs; 
-        RAISE NOTICE '==================================================';        
-
-        --- PX_CAT_G1V2
-                        -- --- Table 6: ---
-        -- Start Timer for this table
-        step_start_time := clock_timestamp();
-
-        RAISE NOTICE '>> Truncating TablePX_CAT_G1V2:  bronze.erp_PX_CAT_G1V2';
-        TRUNCATE TABLE bronze.erp_;
-
-        -- 2. Cleanly load the data directly from your Desktop path
-        RAISE NOTICE '>> Inserting Table:  bronze.erp_PX_CAT_G1V2';
-        COPY bronze.erp_PX_CAT_G1V2 
-        FROM  '/Users/Shared/sql-data-warehouse-project/datasets/source_erp/PX_CAT_G1V2.csv'
-        WITH (FORMAT CSV, HEADER true, DELIMITER ',');
-
-        step_end_time := clock_timestamp();
-        duration_secs := EXTRACT(EPOCH FROM (step_end_time - step_start_time))::INT;
-
-        RAISE NOTICE '==================================================';
-        RAISE NOTICE 'Total Pipeline Duration: % seconds', duration_secs; 
-        RAISE NOTICE '==================================================';
-
-        RAISE NOTICE '- - - - - - - - - - - - - - - - - - - - - - - - -';
-
-
-        batch_end_time := clock_timestamp();
-        duration_secs  := EXTRACT(EPOCH FROM (batch_end_time - batch_start_time))::INT; 
-
-        RAISE NOTICE '==================================================';
-
-        RAISE NOTICE 'Total Pipeline Duration: % seconds', duration_secs; 
-        RAISE NOTICE '==================================================';
-
-    EXCEPTION
-        WHEN OTHERS THEN    
-            RAISE NOTICE '==================================================';
-            RAISE NOTICE 'ERROR OCCURRED DURING LOADING BRONZE LAYER'; 
-
-            RAISE NOTICE 'Error Message Context: %', SQLERRM; 
-            RAISE NOTICE '==================================================';
-
-            RAISE EXCEPTION 'Bronze load aborted due to runtime errors.';
-END;
-$$;
+-- --- Table 6: erp_px_cat_g1v2 [00:08:35] ---
+DROP TABLE IF EXISTS bronze.erp_px_cat_g1v2;
+CREATE TABLE bronze.erp_px_cat_g1v2 (
+    id           VARCHAR(50),
+    cat          VARCHAR(50),
+    subcat       VARCHAR(50),
+    maintenance  VARCHAR(50)
+);
