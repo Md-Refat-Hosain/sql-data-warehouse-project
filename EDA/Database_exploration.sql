@@ -74,3 +74,30 @@ from gold.fact_sales
 
 select count( distinct order_number) total_orders
 from gold.fact_sales
+
+
+---
+SELECT
+    order_number,
+    COUNT(order_number) AS order_count
+FROM gold.fact_sales
+GROUP BY order_number
+HAVING COUNT(order_number) > 2;
+
+-- ##  total numbers of products -- ##
+select count ( distinct product_key) total_products
+from gold.dim_products
+
+select count( distinct product_key) total_customers
+from gold.dim_products
+
+-- ##  total numbers of customers -- ##
+select count(  distinct customer_key)
+from gold.dim_customer
+
+
+-- ##  total numbers of customers who placed an order -- ##
+
+select count( distinct customer_key)  
+from gold.fact_sales
+
