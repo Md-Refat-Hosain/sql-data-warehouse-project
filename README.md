@@ -1,13 +1,15 @@
 
 
 
-<img src="https://raw.githubusercontent.com/Md-Refat-Hosain/sql-data-warehouse-project/a6565f840f94ac618633b8605d25c93fef948760/image/Elephant%20Data%20Warehouse%20Pipeline.png" alt="Data Warehouse Banner" width="100%">
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Md-Refat-Hosain/sql-data-warehouse-project/a6565f840f94ac618633b8605d25c93fef948760/image/Elephant%20Data%20Warehouse%20Pipeline.png" alt="Data Warehouse Banner" width = "100%" height="550">
+</p>
 
 ```text
 
 ```
 
-![Image Description](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/a6565f840f94ac618633b8605d25c93fef948760/image/Elephant%20Data%20Warehouse%20Pipeline.png?raw=true)
+
 
 # **Enterprise Data Warehouse & Customer Analytics Engine**
 
@@ -48,13 +50,25 @@ Through automated SQL transformations and exploratory data analysis (EDA), this 
 ```
  - Data flowing map from source to destination.
 
-![Image Description](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/a6565f840f94ac618633b8605d25c93fef948760/image/draw_io/s2.png?raw=true)
+<p align="center">
+  <img src="https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/a6565f840f94ac618633b8605d25c93fef948760/image/draw_io/s2.png" alt="3 layers" width = "100%" height="410">
+</p>
+
+
 ```text
 
 ```
 - Set-up, creation & map out for Primary Key & Foreign Key (FK) for different stages & tables.
 
-![Image Description](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/main/image/draw_io/s.png?raw=true)
+<p align="center">
+  <img src="https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/main/image/draw_io/s.png" alt="3 tables & key settings" width = "100%" height="410">
+
+</p>
+
+
+<p align="center">
+
+</p>
 
 ```text
 
@@ -89,18 +103,31 @@ Through automated SQL transformations and exploratory data analysis (EDA), this 
 ```
 - Performing source-to-target column mapping and attribute extraction to align raw ERP/CRM fields with dimensional table requirements.
 
-![Image Description](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/a6565f840f94ac618633b8605d25c93fef948760/image/draw_io/s5.png?raw=true)
+
+<p align="center">
+
+  <img src="https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/a6565f840f94ac618633b8605d25c93fef948760/image/draw_io/s5.png?raw=true" alt="data modeling step-1" width = "100%" height="510">
+</p>
+
+
+<p align="center">
+ <img src="https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/a6565f840f94ac618633b8605d25c93fef948760/image/draw_io/s4.png?raw=true" alt="data modeling step-2" width = "100%" height="410">
+
+</p>
 
 
 
-![Image Description](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/a6565f840f94ac618633b8605d25c93fef948760/image/draw_io/s4.png?raw=true)
 
 ```text
 ```
 
 - Designing cross-system integration models to unify CRM and ERP data streams, enabling seamless relational querying and multi-source join paths for analytics.
 
-![Image Description](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/a6565f840f94ac618633b8605d25c93fef948760/image/draw_io/s3.png?raw=true)
+<p align="center">
+ <img src="https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/a6565f840f94ac618633b8605d25c93fef948760/image/draw_io/s3.png?raw=true" alt="data modeling step-3" width = "100%" height="410">
+
+</p>
+
 
 
 ```text
