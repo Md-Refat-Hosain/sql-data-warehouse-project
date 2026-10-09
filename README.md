@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Md-Refat-Hosain/sql-data-warehouse-project/a6565f840f94ac618633b8605d25c93fef948760/image/Elephant%20Data%20Warehouse%20Pipeline.png" alt="Data Warehouse Banner" width = "100%" height="550">
+  <img src="https://raw.githubusercontent.com/Md-Refat-Hosain/sql-data-warehouse-project/a6565f840f94ac618633b8605d25c93fef948760/image/Elephant%20Data%20Warehouse%20Pipeline.png" alt="Data Warehouse Banner" width = "100%" height="450">
 </p>
 
 ```text
