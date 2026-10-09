@@ -120,28 +120,185 @@ Through automated SQL transformations and exploratory data analysis (EDA), this 
 
 Key analytical insights derived from exploratory SQL queries on the Gold layer:
 
-#### 🌐 Customer Distribution by Country
+#### Query: Total customer count grouped by country ?
 
 ```sql
--- Query: Total customer count grouped by country
+
 SELECT 
     COALESCE(country, 'n/a') AS country,
     COUNT(customer_key) AS total_customers
 FROM gold.dim_customers
 GROUP BY country
 ORDER BY total_customers DESC;
+```
+
+| country | total_customers |
+| :--- | :--- |
+| United States | 7,482 |
+| Australia | 3,591 |
+| United Kingdom | 1,913 |
+| France | 1,810 |
+| Germany | 1,780 |
+| Canada | 1,571 |
+| n/a | 337 |
 
 
-![Image Description](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/ddfed3c495394032c7747ec0e0bf215412b92bc7/image/analysis_images/s.png?raw=true)
 
-### 2
-
-![Image Description](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/ddfed3c495394032c7747ec0e0bf215412b92bc7/image/analysis_images/s1.png?raw=true)
+#### Query: Total customer count grouped by gender ?
 
 
-### 3
+```sql
+-- 
+SELECT 
+    COALESCE(gender, 'n/a') AS gender,
+    COUNT(customer_key) AS total_customers
+FROM gold.dim_customers
+GROUP BY gender
+ORDER BY total_customers DESC;
+```
 
-![Image Description](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project/blob/ddfed3c495394032c7747ec0e0bf215412b92bc7/image/analysis_images/s2.png?raw=true)
+| gender | total_customers |
+| :--- | :--- |
+| Male | 9,341 |
+| Female | 9,128 |
+| n/a | 15 |
 
 
 
+#### Query: Total products by category ?
+
+
+```sql
+-- 
+SELECT 
+    COALESCE(category, 'n/a') AS category,
+    COUNT(product_key) AS total_products
+FROM gold.dim_products
+GROUP BY category
+ORDER BY total_products DESC;
+```
+
+| category | total_products |
+| :--- | :--- |
+| Components | 127 |
+| Bikes | 97 |
+| Clothing | 35 |
+| Accessories | 29 |
+| n/a | 7 |
+
+
+
+#### Query: Average costs in each category ?
+
+```sql
+-- 
+SELECT 
+    COALESCE(category, 'n/a') AS category,
+    ROUND(AVG(cost), 2) AS avg_costs
+FROM gold.dim_products
+GROUP BY category
+ORDER BY avg_costs DESC;
+```
+
+| category | avg_costs |
+| :--- | :--- |
+| Bikes | 949 |
+| Components | 264 |
+| n/a | 28 |
+| Clothing | 24 |
+| Accessories | 13 |
+
+
+#### Query: Total revenue generated for each category ?
+
+
+```sql
+-- 
+SELECT 
+    COALESCE(p.category, 'n/a') AS category,
+    SUM(f.sales_amount) AS total_revenue
+FROM gold.fact_sales f
+LEFT JOIN gold.dim_products p
+    ON p.product_key = f.product_key
+GROUP BY p.category
+ORDER BY total_revenue DESC;
+```
+
+| category | total_revenue |
+| :--- | :--- |
+| Bikes | 28,316,272 |
+| Accessories | 700,262 |
+| Clothing | 339,716 |
+
+
+
+
+#### Query: Distribution of sold items across countries ?
+
+
+```sql
+-- 
+SELECT 
+    COALESCE(c.country, 'n/a') AS country,
+    SUM(f.quantity) AS total_sold_items
+FROM gold.fact_sales f
+LEFT JOIN gold.dim_customers c
+    ON c.customer_key = f.customer_key
+GROUP BY c.country
+ORDER BY total_sold_items DESC;
+```
+
+| country | total_sold_items |
+| :--- | :--- |
+| United States | 20,481 |
+| Australia | 13,346 |
+| Canada | 7,630 |
+| United Kingdom | 6,910 |
+| Germany | 5,626 |
+| France | 5,559 |
+| n/a | 871 |
+
+
+
+#### Query: Find total products by category ?
+
+
+```sql
+-- 
+SELECT 
+    category,
+    COUNT(product_key) AS total_products
+FROM gold.dim_products
+GROUP BY category
+ORDER BY total_products DESC;
+```
+
+| category | total_products |
+| :--- | :--- |
+| Components | 127 |
+| Bikes | 97 |
+| Clothing | 35 |
+| Accessories | 29 |
+| NULL | 7 |
+
+
+
+
+
+## 🚀 How to Run
+
+Execute the following terminal commands to clone the repository and run the end-to-end data pipeline:
+
+```bash
+# Clone and enter the repository
+git clone [https://github.com/Md-Refat-Hosain/sql-data-warehouse-project.git](https://github.com/Md-Refat-Hosain/sql-data-warehouse-project.git)
+cd sql-data-warehouse-project
+
+# Execute Medallion architecture transformation scripts
+psql -U postgres -d sales_dwh -f scripts/01_bronze_layer.sql
+psql -U postgres -d sales_dwh -f scripts/02_silver_layer.sql
+psql -U postgres -d sales_dwh -f scripts/03_gold_layer.sql
+
+# Run quality validation checks
+psql -U postgres -d sales_dwh -f tests/data_quality_checks.sql
+```
