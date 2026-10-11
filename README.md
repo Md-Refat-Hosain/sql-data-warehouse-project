@@ -5,27 +5,22 @@
   <img src="https://raw.githubusercontent.com/Md-Refat-Hosain/sql-data-warehouse-project/a6565f840f94ac618633b8605d25c93fef948760/image/Elephant%20Data%20Warehouse%20Pipeline.png" alt="Data Warehouse Banner" width = "100%" height="400">
 </p>
 
-```text
-
-```
 
 
 
 # **Enterprise Data Warehouse & Customer Analytics Engine**
 
+
 #
 
 
-#
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Database](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20SQL-blue?logo=postgresql&logoColor=white)](#)
 [![Data Modeling](https://img.shields.io/badge/Data%20Modeling-Star%20Schema-green)](#)
 [![Analytics](https://img.shields.io/badge/Analytics-SQL%20Data%20Analysis-success)](#)
 [![Status](https://img.shields.io/badge/Status-In%20Development-orange)](#)
-```text
 
-```
 
 ## 📌 Executive Overview
 
