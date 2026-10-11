@@ -157,6 +157,28 @@ This project delivers an enterprise-grade, end-to-end **Data Warehouse & Busines
 
 ```
 
+## 🛡️ Data Quality & Transformation Rules
+
+To ensure production-grade data integrity across layers, the pipeline enforces strict business logic:
+
+* **Primary & Foreign Key Integrity:** Verifies zero null surrogate keys across fact and dimension tables.
+* **Data Standardisation:** Replaces missing or `NULL` attributes with clean fallback strings (e.g., `'n/a'`) using `COALESCE()`.
+* **Deduplication:** Filters out redundant transactional records during Silver-to-Gold schema processing.
+* **Date Integrity:** Normalises shipping and order date formats for accurate time-series analysis.
+
+```text
+
+
+```
+## 💡 Executive Insights
+
+* **Top Revenue Generator:** **Bikes** dominate category sales ($28.3M+), driving over 95% of total warehouse revenue.
+* **Primary Market:** The **United States** is the largest customer market (~7.5K customers, 20.4K items sold), followed by Australia.
+* **Product Catalog Distribution:** **Components** make up the largest portion of the inventory catalog (127 products), while **Bikes** carry the highest average cost ($949).
+```text
+
+
+```
 ## 🔍 Key Findings
 
 
