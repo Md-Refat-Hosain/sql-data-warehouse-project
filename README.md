@@ -37,21 +37,15 @@ This project delivers an enterprise-grade, end-to-end **Data Warehouse & Busines
 
 
 
-
-
-```text
-
-```
-
+<br>
 
 ## 🏗️ Architecture & Data Flow
 
 ### **Architecture Diagram:**
 
 ### After architecting & Pipeline design.
-```text
 
-```
+<br>
  - Data flowing map from source to destination.
 
 <p align="center">
@@ -59,9 +53,9 @@ This project delivers an enterprise-grade, end-to-end **Data Warehouse & Busines
 </p>
 
 
-```text
 
-```
+<br>
+
 - Set-up, creation & map out for Primary Key & Foreign Key (FK) for different stages & tables.
 
 <p align="center">
@@ -74,9 +68,8 @@ This project delivers an enterprise-grade, end-to-end **Data Warehouse & Busines
 
 </p>
 
-```text
 
-```
+<br>
 
 ## 📁 Repository Structure
 
@@ -95,16 +88,13 @@ This project delivers an enterprise-grade, end-to-end **Data Warehouse & Busines
 └── README.md                # Master project documentation
 ```
 
-```text
-
-```
+<br>
 
 ## 📐 Data Modeling & Schema Design
 
 #### Identifying and mapping surrogate and business keys across source tables to establish primary-foreign key relationships and ensure referential integrity.
-```text
 
-```
+<br>
 - Performing source-to-target column mapping and attribute extraction to align raw ERP/CRM fields with dimensional table requirements.
 
 
@@ -122,9 +112,9 @@ This project delivers an enterprise-grade, end-to-end **Data Warehouse & Busines
 
 
 
-```text
-```
+<br>
 
+<br>
 - Designing cross-system integration models to unify CRM and ERP data streams, enabling seamless relational querying and multi-source join paths for analytics.
 
 <p align="center">
@@ -134,9 +124,8 @@ This project delivers an enterprise-grade, end-to-end **Data Warehouse & Busines
 
 
 
-```text
 
-```
+<br>
 
 ## ⚙️ Implementation & Execution Sequence
 
@@ -147,10 +136,8 @@ This project delivers an enterprise-grade, end-to-end **Data Warehouse & Busines
 | **3** | **Quality Control** | Run foreign key & null value validations | `/tests/` |
 | **4** | **Analytics (EDA)**| Generate customer revenue & behavior reports | `EDA/customer_report.sql` |
 
-```text
 
-
-```
+<br>
 
 ## 🛡️ Data Quality & Transformation Rules
 
@@ -161,19 +148,15 @@ To ensure production-grade data integrity across layers, the pipeline enforces s
 * **Deduplication:** Filters out redundant transactional records during Silver-to-Gold schema processing.
 * **Date Integrity:** Normalises shipping and order date formats for accurate time-series analysis.
 
-```text
 
-
-```
+<br>
 ## 💡 Executive Insights
 
 * **Top Revenue Generator:** **Bikes** dominate category sales ($28.3M+), driving over 95% of total warehouse revenue.
 * **Primary Market:** The **United States** is the largest customer market (~7.5K customers, 20.4K items sold), followed by Australia.
 * **Product Catalog Distribution:** **Components** make up the largest portion of the inventory catalog (127 products), while **Bikes** carry the highest average cost ($949).
-```text
 
-
-```
+<br>
 ## 🔍 Key Findings
 
 
@@ -342,6 +325,7 @@ ORDER BY total_products DESC;
 
 
 
+<br>
 
 
 ## 🚀 How to Run
