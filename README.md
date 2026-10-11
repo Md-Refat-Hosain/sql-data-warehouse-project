@@ -31,9 +31,18 @@
 
 
 
-This project delivers an end-to-end Customer & Sales Data Warehouse designed to centralize raw transactional data and convert it into strategic business intelligence. By architecting a dimensional star schema, the warehouse integrates customer demographic profiles with sales performance metrics to streamline query execution and enable fast analytical reporting.
+This project delivers an enterprise-grade, end-to-end **Data Warehouse & Business Intelligence Pipeline** designed to ingest, clean, and transform raw transactional data into strategic corporate insights. Built using a robust **Medallion Architecture (Bronze, Silver, and Gold layers)**, the system enforces rigorous data quality, schema validation, and normalization in **PostgreSQL**.
 
-Through automated SQL transformations and exploratory data analysis (EDA), this solution provides critical visibility into customer behavior, purchasing patterns, and sales revenue drivers—empowering stakeholders to make data-driven growth decisions.
+#### Key Technical Highlights:
+
+* **Modern Data Stack & Storage:** Engineered using **PostgreSQL and advanced SQL**, transforming raw records into optimized dimensional models (Star Schema with fact and dimension tables).
+* **Data Engineering Workflow:** Implemented automated data cleaning, handling of missing values (`NULL` / `n/a` handling), and structured data transformation pipelines.
+* **Analytical Reporting & EDA:** Built comprehensive analytical queries and automated metrics tracking revenue drivers, product performance by category, and cross-border sales distributions.
+* **Business Impact:** Empowers stakeholders with clean, centralized, and high-performance analytical data ready for visualization dashboards (Looker Studio/Power BI) to drive strategic growth decisions.
+
+
+
+
 
 ```text
 
